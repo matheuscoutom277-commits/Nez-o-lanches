@@ -62,12 +62,16 @@ function updateBusinessStatus(now = new Date()) {
 function renderFilters() {
   filters.replaceChildren();
   CATEGORIES.forEach((category) => {
-    const button = makeElement("button", "min-h-11 shrink-0 rounded-full border-2 border-[#111111] px-5 text-sm font-bold shadow-[2px_2px_0px_0px_#111111] transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none");
+    const button = makeElement("button", "min-h-11 shrink-0 rounded-lg border px-5 text-sm font-bold tracking-wide transition-all");
     button.type = "button";
     button.textContent = category;
     button.setAttribute("aria-pressed", String(category === selectedCategory));
-    button.classList.toggle("bg-[#FFB703]", category === selectedCategory);
-    button.classList.toggle("bg-white", category !== selectedCategory);
+    button.classList.toggle("border-[#FCA311]", category === selectedCategory);
+    button.classList.toggle("bg-[#FCA311]", category === selectedCategory);
+    button.classList.toggle("text-[#141210]", category === selectedCategory);
+    button.classList.toggle("border-[#332E28]", category !== selectedCategory);
+    button.classList.toggle("bg-[#1F1C18]", category !== selectedCategory);
+    button.classList.toggle("text-[#A8A29E]", category !== selectedCategory);
     button.addEventListener("click", () => {
       selectedCategory = category;
       renderFilters();
@@ -89,26 +93,26 @@ function renderProducts() {
   });
 
   if (visibleProducts.length === 0) {
-    menuGrid.append(makeElement("p", "rounded-xl border-2 border-[#111111] bg-white p-5 text-sm font-semibold shadow-[4px_4px_0px_0px_#111111] sm:col-span-2 lg:col-span-3", "Nenhum item encontrado. Tente outro termo ou categoria."));
+    menuGrid.append(makeElement("p", "rounded-xl border border-[#332E28] bg-[#1F1C18] p-5 text-sm font-semibold text-[#A8A29E] sm:col-span-2 lg:col-span-3", "Nenhum item encontrado. Tente outro termo ou categoria."));
     return;
   }
 
   visibleProducts.forEach((product) => {
-    const card = makeElement("article", "flex min-h-64 flex-col rounded-2xl border-2 border-[#111111] bg-white p-4 shadow-[4px_4px_0px_0px_#111111]");
+    const card = makeElement("article", "flex min-h-64 flex-col rounded-2xl border border-[#332E28] bg-[#1F1C18] p-4 shadow-[0_12px_30px_rgba(0,0,0,0.22)]");
     const top = makeElement("div", "flex items-start justify-between gap-3");
-    const icon = makeElement("span", "flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border-2 border-[#111111] bg-[#FAF7F2] text-3xl", product.icon);
+    const icon = makeElement("span", "flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#332E28] bg-[#2A241D] text-4xl shadow-[0_0_24px_rgba(252,163,17,0.12)]", product.icon);
     icon.setAttribute("aria-hidden", "true");
     top.append(icon);
     if (product.badge) {
-      const badge = makeElement("span", "rounded-full border-2 border-[#111111] bg-[#E63946] px-2.5 py-1 text-xs font-bold text-white", product.badge);
+      const badge = makeElement("span", "rounded-md border border-[#332E28] bg-[#E63946] px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-[#FAF7F2]", product.badge);
       top.append(badge);
     }
 
-    const title = makeElement("h3", "mt-4 font-display text-xl font-bold", product.name);
-    const description = makeElement("p", "mt-1 flex-1 text-sm leading-6 text-[#444444]", product.description);
+    const title = makeElement("h3", "mt-4 font-display text-xl font-bold text-[#FAF7F2]", product.name);
+    const description = makeElement("p", "mt-1 flex-1 text-sm leading-6 text-[#A8A29E]", product.description);
     const bottom = makeElement("div", "mt-4 flex items-center justify-between gap-3");
-    const price = makeElement("p", "font-display text-xl font-bold", money.format(product.price));
-    const addButton = makeElement("button", "min-h-11 rounded-lg border-2 border-[#111111] bg-[#FFB703] px-4 text-sm font-bold shadow-[2px_2px_0px_0px_#111111] transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none");
+    const price = makeElement("p", "font-display text-xl font-bold text-[#FCA311]", money.format(product.price));
+    const addButton = makeElement("button", "min-h-11 rounded-lg border border-[#332E28] bg-[#E63946] px-4 text-sm font-bold text-[#FAF7F2] transition-all hover:bg-[#C92F3B] active:scale-[0.98]");
     addButton.type = "button";
     addButton.textContent = "Personalizar +";
     addButton.setAttribute("aria-label", `Personalizar e adicionar ${product.name}`);
@@ -128,14 +132,14 @@ function openProductModal(product) {
   extrasList.replaceChildren();
 
   EXTRAS.forEach((extra, index) => {
-    const label = makeElement("label", "flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-lg border-2 border-[#111111] px-3 py-2 hover:bg-[#FAF7F2]");
-    const text = makeElement("span", "text-sm font-semibold", extra.name);
-    const price = makeElement("span", "ml-auto text-sm font-bold", extra.price === 0 ? "Grátis" : `+ ${money.format(extra.price)}`);
+    const label = makeElement("label", "flex min-h-12 cursor-pointer items-center justify-between gap-3 rounded-lg border border-[#332E28] bg-[#141210] px-3 py-2 transition-colors hover:border-[#FCA311]");
+    const text = makeElement("span", "text-sm font-semibold text-[#FAF7F2]", extra.name);
+    const price = makeElement("span", "ml-auto text-sm font-bold text-[#FCA311]", extra.price === 0 ? "Grátis" : `+ ${money.format(extra.price)}`);
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.name = "extra";
     checkbox.value = String(index);
-    checkbox.className = "h-5 w-5 accent-[#2A9D8F]";
+    checkbox.className = "h-5 w-5 accent-[#FCA311]";
     checkbox.addEventListener("change", updateModalTotal);
     label.append(text, price, checkbox);
     extrasList.append(label);
@@ -173,31 +177,31 @@ function renderCart() {
   document.querySelector("#mobile-cart-count").textContent = `${count} ${count === 1 ? "item" : "itens"}`;
 
   if (cart.length === 0) {
-    cartItemsElement.append(makeElement("p", "rounded-lg bg-[#FAF7F2] px-3 py-4 text-sm text-[#555555]", "Seu carrinho está vazio. Escolha algo gostoso no cardápio!"));
+    cartItemsElement.append(makeElement("p", "rounded-lg bg-[#141210] px-3 py-4 text-sm text-[#A8A29E]", "Seu carrinho está vazio. Escolha algo gostoso no cardápio!"));
   } else {
     cart.forEach((item, index) => {
-      const row = makeElement("div", "flex flex-col gap-3 border-b border-[#DDDDDD] py-4 sm:flex-row sm:items-start sm:justify-between");
+      const row = makeElement("div", "flex flex-col gap-3 border-b border-[#332E28] py-4 sm:flex-row sm:items-start sm:justify-between");
       const details = makeElement("div", "min-w-0 flex-1");
-      const heading = makeElement("p", "font-display font-bold", `${item.quantity}× ${item.product.name}`);
+      const heading = makeElement("p", "font-display font-bold text-[#FAF7F2]", `${item.quantity}× ${item.product.name}`);
       const extras = item.extras.length
-        ? makeElement("p", "mt-1 text-xs text-[#555555]", `Extras: ${item.extras.map((extra) => extra.name).join(", ")}`)
+        ? makeElement("p", "mt-1 text-xs text-[#A8A29E]", `Extras: ${item.extras.map((extra) => extra.name).join(", ")}`)
         : null;
       details.append(heading);
       if (extras) details.append(extras);
-      if (item.notes) details.append(makeElement("p", "mt-1 text-xs text-[#555555]", `Obs.: ${item.notes}`));
+      if (item.notes) details.append(makeElement("p", "mt-1 text-xs text-[#A8A29E]", `Obs.: ${item.notes}`));
 
       const unitPrice = item.product.price + item.extras.reduce((sum, extra) => sum + extra.price, 0);
       const controls = makeElement("div", "flex shrink-0 items-center justify-between gap-3 sm:justify-end");
-      controls.append(makeElement("span", "text-sm font-bold", money.format(unitPrice * item.quantity)));
+      controls.append(makeElement("span", "text-sm font-bold text-[#FCA311]", money.format(unitPrice * item.quantity)));
 
-      const quantityControls = makeElement("div", "flex items-center overflow-hidden rounded-lg border-2 border-[#111111] bg-white");
-      const decrease = makeElement("button", "h-10 w-10 text-lg font-bold transition-colors hover:bg-[#FFB703] active:bg-[#FFB703]");
+      const quantityControls = makeElement("div", "flex items-center overflow-hidden rounded-lg border border-[#332E28] bg-[#141210]");
+      const decrease = makeElement("button", "h-10 w-10 text-lg font-bold text-[#FAF7F2] transition-colors hover:bg-[#FCA311] hover:text-[#141210] active:bg-[#FCA311]");
       decrease.type = "button";
       decrease.textContent = "−";
       decrease.setAttribute("aria-label", `Diminuir quantidade de ${item.product.name}`);
       decrease.addEventListener("click", () => updateCartQuantity(index, -1));
-      const quantity = makeElement("span", "min-w-9 text-center text-sm font-bold", String(item.quantity));
-      const increase = makeElement("button", "h-10 w-10 border-l-2 border-[#111111] text-lg font-bold transition-colors hover:bg-[#FFB703] active:bg-[#FFB703]");
+      const quantity = makeElement("span", "min-w-9 text-center text-sm font-bold text-[#FAF7F2]", String(item.quantity));
+      const increase = makeElement("button", "h-10 w-10 border-l border-[#332E28] text-lg font-bold text-[#FAF7F2] transition-colors hover:bg-[#FCA311] hover:text-[#141210] active:bg-[#FCA311]");
       increase.type = "button";
       increase.textContent = "+";
       increase.setAttribute("aria-label", `Aumentar quantidade de ${item.product.name}`);
@@ -205,7 +209,7 @@ function renderCart() {
       quantityControls.append(decrease, quantity, increase);
       controls.append(quantityControls);
 
-      const remove = makeElement("button", "min-h-10 rounded-lg border-2 border-[#111111] bg-[#E63946] px-3 text-sm font-bold text-white shadow-[2px_2px_0px_0px_#111111] transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none");
+      const remove = makeElement("button", "min-h-10 rounded-lg border border-[#332E28] bg-[#E63946] px-3 text-sm font-bold text-[#FAF7F2] transition-all hover:bg-[#C92F3B] active:scale-[0.98]");
       remove.type = "button";
       remove.textContent = "Remover";
       remove.setAttribute("aria-label", `Remover ${item.product.name} do carrinho`);
