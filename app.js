@@ -3,6 +3,7 @@
 const WHATSAPP_NUMBER = "5514997220907";
 const BUSINESS_NAME = "Lanches Do Nezão";
 const DELIVERY_FEE = 5;
+const FALLBACK_IMAGE = "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80";
 const CATEGORIES = ["Todos", "Lanches", "Pastéis", "Porções", "Bebidas"];
 const EXTRAS = [
   { name: "Catupiry", price: 3 },
@@ -11,17 +12,17 @@ const EXTRAS = [
   { name: "Maionese Caseira Extra", price: 0 }
 ];
 const PRODUCTS = [
-  { id: "x-burguer", name: "X-Burguer", category: "Lanches", description: "Pão, hambúrguer, queijo, alface, tomate e maionese.", price: 18, icon: "🍔", badge: "Mais pedido" },
-  { id: "x-salada", name: "X-Salada", category: "Lanches", description: "Pão, hambúrguer, queijo, alface, tomate e maionese.", price: 20, icon: "🥬" },
-  { id: "x-bacon", name: "X-Bacon", category: "Lanches", description: "Hambúrguer, queijo, bacon crocante, alface e tomate.", price: 23, icon: "🥓", badge: "Sai na hora" },
-  { id: "x-tudo", name: "X-Tudo", category: "Lanches", description: "Hambúrguer, queijo, presunto, ovo, bacon e salada.", price: 27, icon: "🍔" },
-  { id: "pastel-carne", name: "Pastel de Carne", category: "Pastéis", description: "Massa crocante recheada com carne temperada.", price: 10, icon: "🥟", badge: "Sai na hora" },
-  { id: "pastel-queijo", name: "Pastel de Queijo", category: "Pastéis", description: "Queijo derretido em massa sequinha e crocante.", price: 10, icon: "🧀" },
-  { id: "pastel-pizza", name: "Pastel de Pizza", category: "Pastéis", description: "Queijo, presunto, tomate e orégano.", price: 12, icon: "🥟" },
-  { id: "batata-simples", name: "Batata Frita Simples", category: "Porções", description: "Porção de batata frita sequinha com sal.", price: 18, icon: "🍟" },
-  { id: "batata-cheddar-bacon", name: "Batata com Cheddar e Bacon", category: "Porções", description: "Batata frita coberta com cheddar cremoso e bacon.", price: 28, icon: "🍟", badge: "Pra dividir" },
-  { id: "refri-lata", name: "Refrigerante Lata", category: "Bebidas", description: "Lata 350 ml · consulte os sabores disponíveis.", price: 6, icon: "🥤" },
-  { id: "suco", name: "Suco", category: "Bebidas", description: "Suco gelado · consulte os sabores disponíveis.", price: 8, icon: "🧃" }
+  { id: "x-burguer", name: "X-Burguer", category: "Lanches", description: "Pão, hambúrguer, queijo, alface, tomate e maionese.", price: 18, imagem: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80", badge: "Mais pedido" },
+  { id: "x-salada", name: "X-Salada", category: "Lanches", description: "Pão, hambúrguer, queijo, alface, tomate e maionese.", price: 20, imagem: "https://images.unsplash.com/photo-1571091718767-18b5b1457add?auto=format&fit=crop&w=800&q=80" },
+  { id: "x-bacon", name: "X-Bacon", category: "Lanches", description: "Hambúrguer, queijo, bacon crocante, alface e tomate.", price: 23, imagem: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80", badge: "Sai na hora" },
+  { id: "x-tudo", name: "X-Tudo", category: "Lanches", description: "Hambúrguer, queijo, presunto, ovo, bacon e salada.", price: 27, imagem: "https://images.unsplash.com/photo-1561758033-d89a9ad46330?auto=format&fit=crop&w=800&q=80" },
+  { id: "pastel-carne", name: "Pastel de Carne", category: "Pastéis", description: "Massa crocante recheada com carne temperada.", price: 10, imagem: "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=800&q=80", badge: "Sai na hora" },
+  { id: "pastel-queijo", name: "Pastel de Queijo", category: "Pastéis", description: "Queijo derretido em massa sequinha e crocante.", price: 10, imagem: "https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=800&q=80" },
+  { id: "pastel-pizza", name: "Pastel de Pizza", category: "Pastéis", description: "Queijo, presunto, tomate e orégano.", price: 12, imagem: "https://images.unsplash.com/photo-1625220194771-7ebdea0b70b9?auto=format&fit=crop&w=800&q=80" },
+  { id: "batata-simples", name: "Batata Frita Simples", category: "Porções", description: "Porção de batata frita sequinha com sal.", price: 18, imagem: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=80" },
+  { id: "batata-cheddar-bacon", name: "Batata com Cheddar e Bacon", category: "Porções", description: "Batata frita coberta com cheddar cremoso e bacon.", price: 28, imagem: "https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?auto=format&fit=crop&w=800&q=80", badge: "Pra dividir" },
+  { id: "refri-lata", name: "Refrigerante Lata", category: "Bebidas", description: "Lata 350 ml · consulte os sabores disponíveis.", price: 6, imagem: "https://images.unsplash.com/photo-1527960471264-932f39eb5846?auto=format&fit=crop&w=800&q=80" },
+  { id: "suco", name: "Suco", category: "Bebidas", description: "Suco gelado · consulte os sabores disponíveis.", price: 8, imagem: "https://images.unsplash.com/photo-1600271886742-f049cd451bba?auto=format&fit=crop&w=800&q=80" }
 ];
 
 const money = new Intl.NumberFormat("pt-BR", { style: "currency", currency: "BRL" });
@@ -41,6 +42,16 @@ function makeElement(tag, className, text) {
   if (className) element.className = className;
   if (text !== undefined) element.textContent = text;
   return element;
+}
+
+function makeProductImage(product, className) {
+  const image = makeElement("img", className);
+  image.src = product.imagem;
+  image.alt = product.name;
+  image.loading = "lazy";
+  image.decoding = "async";
+  image.setAttribute("onerror", `this.onerror=null;this.src='${FALLBACK_IMAGE}';`);
+  return image;
 }
 
 function normalizeSearchText(value) {
@@ -98,17 +109,16 @@ function renderProducts() {
   }
 
   visibleProducts.forEach((product) => {
-    const card = makeElement("article", "flex min-h-64 flex-col rounded-2xl border border-[#332E28] bg-[#1F1C18] p-4 shadow-[0_12px_30px_rgba(0,0,0,0.22)]");
-    const top = makeElement("div", "flex items-start justify-between gap-3");
-    const icon = makeElement("span", "flex h-16 w-16 shrink-0 items-center justify-center rounded-xl border border-[#332E28] bg-[#2A241D] text-4xl shadow-[0_0_24px_rgba(252,163,17,0.12)]", product.icon);
-    icon.setAttribute("aria-hidden", "true");
-    top.append(icon);
+    const card = makeElement("article", "group flex min-h-80 flex-col overflow-hidden rounded-2xl border border-[#332E28] bg-[#1F1C18] shadow-[0_12px_30px_rgba(0,0,0,0.22)]");
+    const imageContainer = makeElement("div", "relative h-44 overflow-hidden bg-[#141210]");
+    imageContainer.append(makeProductImage(product, "h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"));
     if (product.badge) {
-      const badge = makeElement("span", "rounded-md border border-[#332E28] bg-[#E63946] px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-[#FAF7F2]", product.badge);
-      top.append(badge);
+      const badge = makeElement("span", "absolute right-3 top-3 rounded-md border border-[#332E28] bg-[#E63946] px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-[#FAF7F2]", product.badge);
+      imageContainer.append(badge);
     }
 
-    const title = makeElement("h3", "mt-4 font-display text-xl font-bold text-[#FAF7F2]", product.name);
+    const content = makeElement("div", "flex flex-1 flex-col p-4");
+    const title = makeElement("h3", "font-display text-xl font-bold text-[#FAF7F2]", product.name);
     const description = makeElement("p", "mt-1 flex-1 text-sm leading-6 text-[#A8A29E]", product.description);
     const bottom = makeElement("div", "mt-4 flex items-center justify-between gap-3");
     const price = makeElement("p", "font-display text-xl font-bold text-[#FCA311]", money.format(product.price));
@@ -118,13 +128,17 @@ function renderProducts() {
     addButton.setAttribute("aria-label", `Personalizar e adicionar ${product.name}`);
     addButton.addEventListener("click", () => openProductModal(product));
     bottom.append(price, addButton);
-    card.append(top, title, description, bottom);
+    content.append(title, description, bottom);
+    card.append(imageContainer, content);
     menuGrid.append(card);
   });
 }
 
 function openProductModal(product) {
   selectedProduct = product;
+  const modalImage = document.querySelector("#modal-image");
+  modalImage.src = product.imagem;
+  modalImage.alt = product.name;
   document.querySelector("#modal-category").textContent = product.category;
   document.querySelector("#modal-title").textContent = product.name;
   document.querySelector("#modal-description").textContent = product.description;
